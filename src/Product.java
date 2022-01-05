@@ -7,6 +7,7 @@ public class Product {
     // private variables as part of a product
     private String name;                // name of product
     private int quality;                // quality rating of product
+    private Date dateAdded;             // date when the product was put on shelf  
     private Date expirationDate;        // expiration date of product
     private BigDecimal basePrice;       // base price of product
     private BigDecimal currentPrice;    // daily/final price of product
@@ -64,6 +65,10 @@ public class Product {
         return expirationDate;
     }
 
+    public Date getDateAdded() {
+        return dateAdded;
+    }
+
     public BigDecimal getBasePrice() {
         return basePrice;
     }
@@ -82,6 +87,20 @@ public class Product {
         this.currentPrice = basePrice.add(new BigDecimal(quality*0.10));
     }
 
+    // method to set the date where this product has been put on the shelf
+    public void setDateAdded(Date dateAdded) {
+        this.dateAdded = dateAdded;
+    }
+
+    // method to change date to different date
+    public void changeDateAdded(String stringDateAdded) {
+        try {
+            this.dateAdded = germanDateFormatter.parse(stringDateAdded);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
     // toString method to output products in a clear manner in the terminal
     @Override
     public String toString() {
@@ -89,6 +108,7 @@ public class Product {
                 "name: " + this.getName() + "\n" + 
                 "product type: " + this.getProductType() + "\n"+
                 "quality: " + this.getQuality() + "\n" + 
+                "date added: " + germanDateFormatter.format(this.getDateAdded()) + "\n" +
                 "expiration date: " + germanDateFormatter.format(this.getExpirationDate()) + "\n" + 
                 "base price: " + this.getBasePrice() + "\n" + 
                 "current price: " + this.getCurrentPrice());

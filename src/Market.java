@@ -1,3 +1,4 @@
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +33,7 @@ public class Market {
 
     public void addProduct(Product p) {
         this.currentInventory.add(p);
+        p.setDateAdded(new Date());
     }
 
     @Override
