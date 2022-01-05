@@ -11,7 +11,7 @@ A product has the following properties:
 - expiration date
 - price
 
-There are cheese and wine products with following properties
+There are cheese and wine products with following properties:
 - They have a base price that does not change.
 - The final price is determined through the quality rating of the product (base price + 0.1€ * quality rating).
 - Cheese has to have a quality of atleast 30, otherwise it can not be put on shelves or has to be cleared out when it reaches a quality rating of 30.
