@@ -86,13 +86,9 @@ public class Market {
                 if (product.getProductType().equals(ProductType.wine) && product.getExpirationDate().before(targetDate)) {
                     long wineExpirationMilliseconds = Math.abs(targetDate.getTime() - product.getExpirationDate().getTime());
                     long wineExpirationDays = TimeUnit.DAYS.convert(wineExpirationMilliseconds, TimeUnit.MILLISECONDS);
-                    if (wineExpirationDays < 50) {
+                    if (product.getCurrentQuality() < 50) {
                         product.setQuality(product.getOriginalQuality() + Math.toIntExact(wineExpirationDays/10));
-                    }
-                    else {
-                        product.setQuality(50);
-                    }
-                    
+                    }      
                 }
 
                 // checks every product in inventory for expiration or unadaquate quality (except wine)
