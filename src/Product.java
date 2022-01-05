@@ -1,20 +1,21 @@
 import java.text.SimpleDateFormat;
-//import java.text.ParseException;
 import java.util.Date;
 import java.math.BigDecimal;
 
 public class Product {
     
+    // private variables as part of a product
     private String name;                // name of product
     private int quality;                // quality rating of product
     private Date expirationDate;        // expiration date of product
     private BigDecimal basePrice;       // base price of product
-    private BigDecimal currentPrice;      // daily/final price of product
+    private BigDecimal currentPrice;    // daily/final price of product
     private ProductType productType;    // type of product (cheese, wine, other)
 
     // Sets the german date standard to a variable
     private SimpleDateFormat germanDateFormatter = new SimpleDateFormat("dd.MM.yyyy");
 
+    // constructor of the object class Product
     public Product(String newName, ProductType newProductType, int newQuality, String stringDate, String newBasePriceAsString) {
 
         this.name = newName;
@@ -28,6 +29,7 @@ public class Product {
         this.basePrice = new BigDecimal(newBasePriceAsString);
         this.currentPrice = basePrice.add(new BigDecimal(quality*0.10));
         
+        // throwing exceptions for invalid inputs
         if (name.trim().isEmpty()) {
             throw new IllegalArgumentException("Name is invalid!");
         }
@@ -49,6 +51,7 @@ public class Product {
         }
     }
 
+    // in the lines below are getters for every product property
     public String getName(){
         return name;
     }
@@ -73,7 +76,7 @@ public class Product {
         return productType;
     }
 
-
+    // toString method to output products in a clear manner in the terminal
     @Override
     public String toString() {
         return ("\n" + 
