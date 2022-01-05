@@ -7,7 +7,8 @@ public class Product {
     
     // private variables as part of a product
     private String name;                // name of product
-    private int quality;                // quality rating of product
+    private int originalQuality;        // original quality rating of product
+    private int currentQuality;         // current quality rating of product
     private Date dateAdded;             // date when the product was put on shelf  
     private Date expirationDate;        // expiration date of product
     private BigDecimal basePrice;       // base price of product
@@ -22,14 +23,15 @@ public class Product {
 
         this.name = newName;
         this.productType = newProductType;
-        this.quality = newQuality;
+        this.originalQuality = newQuality;
+        this.currentQuality = newQuality;
         try {
             this.expirationDate = germanDateFormatter.parse(stringDate);
         } catch (Exception exception) {
             exception.printStackTrace();
         }
         this.basePrice = new BigDecimal(newBasePriceAsString);
-        this.currentPrice = basePrice.add(new BigDecimal(quality*0.10));
+        this.currentPrice = basePrice.add(new BigDecimal(originalQuality*0.10));
         
         // throwing exceptions for invalid inputs
         if (name.trim().isEmpty()) {
@@ -41,10 +43,10 @@ public class Product {
         if (basePrice.scale() > 2) {
             throw new IllegalArgumentException("Price is invalid!");
         }
-        if (quality < 30 && productType == ProductType.cheese) {
+        if (originalQuality < 30 && productType == ProductType.cheese) {
             throw new IllegalArgumentException("This cheese has a quality rating of under 30 and cannot be added!");
         }
-        if (quality < 0 && productType == ProductType.wine) {
+        if (originalQuality < 0 && productType == ProductType.wine) {
             throw new IllegalArgumentException("This wine has a negative quality rating and cannot be accepted!");
         }
         Date today = new Date();
@@ -65,8 +67,12 @@ public class Product {
         return name;
     }
 
-    public int getQuality() {
-        return quality;
+    public int getOriginalQuality() {
+        return originalQuality;
+    }
+
+    public int getCurrentQuality() {
+        return currentQuality;
     }
 
     public Date getExpirationDate() {
@@ -91,7 +97,7 @@ public class Product {
 
     // method to change quality of a product and updates the price
     public void setQuality(int quality) {
-        this.quality = quality;
+        this.currentQuality = quality;
         this.currentPrice = basePrice.add(new BigDecimal(quality*0.10));
     }
 
@@ -114,8 +120,9 @@ public class Product {
     public String toString() {
         return ("\n" + 
                 "name: " + this.getName() + "\n" + 
-                "product type: " + this.getProductType() + "\n"+
-                "quality: " + this.getQuality() + "\n" + 
+                "product type: " + this.getProductType() + "\n" +
+                "original quality: " + this.getOriginalQuality() + "\n" + 
+                "current quality: " + this.getCurrentQuality() + "\n" + 
                 "date added: " + germanDateFormatter.format(this.getDateAdded()) + "\n" +
                 "expiration date: " + germanDateFormatter.format(this.getExpirationDate()) + "\n" + 
                 "base price: " + this.getBasePrice() + "\n" + 
