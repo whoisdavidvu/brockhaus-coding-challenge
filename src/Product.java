@@ -2,6 +2,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class Product {
     
@@ -98,7 +99,8 @@ public class Product {
     // method to change quality of a product and updates the price
     public void setQuality(int quality) {
         this.currentQuality = quality;
-        this.currentPrice = basePrice.add(new BigDecimal(quality*0.10));
+        this.currentPrice = basePrice.add(new BigDecimal(currentQuality*0.1));
+        this.currentPrice = this.currentPrice.setScale(2, RoundingMode.FLOOR);
     }
 
     // method to set the date where this product has been put on the shelf
