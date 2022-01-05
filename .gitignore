@@ -24,3 +24,6 @@ hs_err_pid*
 
 # ignore main method
 Test.java
+
+# ignore DS.Store
+.DS_Store
