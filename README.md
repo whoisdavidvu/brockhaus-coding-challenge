@@ -27,3 +27,7 @@ There are cheese and wine products with following properties:
 - Wine prices do not change after they have been put on shelves.
 
 A terminal program is desired with self designated starting values. Every day, the program has to output an overview of the products with their properties and has to clarify which products have to be cleared out and disposed. Property entry does not have to be part of the program, the products can be implemented with fixed properties. Any number of products are allowed.
+
+## Usage
+
+To see the functionality of the program, compile the ```Main.java``` file in the ```src``` folder by running ```javac Main.java```, then run the compiled file by running ```java Main``` in the terminal.
