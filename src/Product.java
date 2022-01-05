@@ -119,13 +119,13 @@ public class Product {
     @Override
     public String toString() {
         return ("\n" + 
-                "name: " + this.getName() + "\n" + 
-                "product type: " + this.getProductType() + "\n" +
-                "original quality: " + this.getOriginalQuality() + "\n" + 
-                "current quality: " + this.getCurrentQuality() + "\n" + 
-                "date added: " + germanDateFormatter.format(this.getDateAdded()) + "\n" +
-                "expiration date: " + germanDateFormatter.format(this.getExpirationDate()) + "\n" + 
-                "base price: " + this.getBasePrice() + "\n" + 
+                "name: " + this.getName() + ", " + 
+                "product type: " + this.getProductType() + ", " +
+                "original quality: " + this.getOriginalQuality() + ", " + 
+                "current quality: " + this.getCurrentQuality() + ", " + 
+                "date added: " + germanDateFormatter.format(this.getDateAdded()) + ", " +
+                "expiration date: " + germanDateFormatter.format(this.getExpirationDate()) + ", " + 
+                "base price: " + this.getBasePrice() + ", " + 
                 "current price: " + this.getCurrentPrice());
     }
 }
