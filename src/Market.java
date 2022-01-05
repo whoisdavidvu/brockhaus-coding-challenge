@@ -1,10 +1,17 @@
 import java.util.Date;
+import java.util.Iterator;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 public class Market {
     private String marketName;              // name of market
     private List<Product> currentInventory; // list of products on the shelf
     private List<Product> toRemoveList;     // list of products to remove today
+    private List<Product> newInventory;     // list of products after removal has been done
+
+    // Sets the german date standard to a variable
+    private SimpleDateFormat germanDateFormatter = new SimpleDateFormat("dd.MM.yyyy");
 
     public Market(String newMarketName) {
         this.marketName = newMarketName;
@@ -47,14 +54,59 @@ public class Market {
         p.setDateAdded(new Date());
     }
 
-    // adds an expired or a product that has to be removed from shelves to a toRemove list
-    public void toRemoveList(Product p) {
+    // function which represents a removal of a product from a shelf manually
+    public void removeProduct(Product p) {
+        this.currentInventory.remove(p);
         this.toRemoveList.add(p);
     }
 
-    // function which represents a removal of a product from a shelf
-    public void removeProduct(Product p) {
-        this.currentInventory.remove(p);
+    // checks current inventory for expired products and adds them to the toRemove list
+    public void dailyCheck(String stringTargetDate) {
+        try {
+            // translates date in string to a format for Date
+            Date targetDate = germanDateFormatter.parse(stringTargetDate);
+
+            // copies the current inventory to a temporary one that we can modify
+            newInventory = new ArrayList<Product>(this.currentInventory);
+
+            // initialisation of an iterator
+            Iterator<Product> itr = this.currentInventory.iterator();
+            while(itr.hasNext()) {
+                Product product = itr.next();
+
+                // calculate number of days the cheese has been on the shelf and adjusts new quality rating
+                if (product.getProductType().equals(ProductType.cheese)) {
+                    long cheeseShelfDurationMilliseconds = Math.abs(targetDate.getTime() - product.getDateAdded().getTime());
+                    long cheeseShelfDurationDays = TimeUnit.DAYS.convert(cheeseShelfDurationMilliseconds, TimeUnit.MILLISECONDS);
+                    product.setQuality(product.getOriginalQuality() - Math.toIntExact(cheeseShelfDurationDays));
+                }
+
+                // calculate number of days the wine has been on the shelf and adjusts new quality rating
+                if (product.getProductType().equals(ProductType.wine)) {
+                    long wineExpirationMilliseconds = Math.abs(targetDate.getTime() - product.getExpirationDate().getTime());
+                    long wineExpirationDays = TimeUnit.DAYS.convert(wineExpirationMilliseconds, TimeUnit.MILLISECONDS);
+                    product.setQuality(product.getOriginalQuality() + Math.toIntExact(wineExpirationDays/10));
+                }
+
+                // checks every product in inventory for expiration or unadaquate quality (except wine)
+                if ((product.getProductType().equals(ProductType.other) && product.getExpirationDate().before(targetDate)) || 
+                    (product.getProductType().equals(ProductType.cheese) && product.getCurrentQuality() < 30)) {
+                    newInventory.remove(product);
+                    this.toRemoveList.add(product);
+                }  
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    /* simply clears the toRemoveList when physically done removing expired products and 
+    overwrites current inventory with the new inventory list */
+    public void updateLists() {
+        this.currentInventory.clear();
+        this.currentInventory.addAll(newInventory);
+        newInventory.clear();
+        this.toRemoveList.clear();
     }
 
     // toString method to output to the terminal
@@ -62,6 +114,7 @@ public class Market {
     public String toString() {
         return "\n" + 
                 "market name: " + marketName + "\n" +
-                "Market's current inventory: " + currentInventory + "\n";
+                "market's current inventory: " + currentInventory + "\n" + 
+                "inventory to remove today: " + toRemoveList;
     }
 }
