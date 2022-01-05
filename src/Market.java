@@ -3,8 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Market {
-    private String marketName;
-    private List<Product> currentInventory;
+    private String marketName;              // name of market
+    private List<Product> currentInventory; // list of products on the shelf
 
     public Market(String newMarketName) {
         this.marketName = newMarketName;
@@ -15,6 +15,7 @@ public class Market {
         }
     }
 
+    // getters and setters for properties
     public String getMarketName() {
         return marketName;
     }
@@ -31,11 +32,13 @@ public class Market {
         this.currentInventory = currentInventory;
     }
 
+    // adds a product to a shelf with today's date as its dateAdded property
     public void addProduct(Product p) {
         this.currentInventory.add(p);
         p.setDateAdded(new Date());
     }
 
+    // toString method to output to the terminal
     @Override
     public String toString() {
         return "\n" + 
