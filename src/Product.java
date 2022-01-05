@@ -52,28 +52,34 @@ public class Product {
     }
 
     // in the lines below are getters for every product property
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public int getQuality(){
+    public int getQuality() {
         return quality;
     }
 
-    public Date getExpirationDate(){
+    public Date getExpirationDate() {
         return expirationDate;
     }
 
-    public BigDecimal getBasePrice(){
+    public BigDecimal getBasePrice() {
         return basePrice;
     }
 
-    public BigDecimal getCurrentPrice(){
+    public BigDecimal getCurrentPrice() {
         return currentPrice;
     }
 
-    public ProductType getProductType(){
+    public ProductType getProductType() {
         return productType;
+    }
+
+    // method to change quality of a product and updates the price
+    public void setQuality(int quality) {
+        this.quality = quality;
+        this.currentPrice = basePrice.add(new BigDecimal(quality*0.10));
     }
 
     // toString method to output products in a clear manner in the terminal
