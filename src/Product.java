@@ -96,11 +96,17 @@ public class Product {
         return productType;
     }
 
+    public void updatePrice() {
+        this.currentPrice = basePrice.add(new BigDecimal(currentQuality*0.1));
+        this.currentPrice = this.currentPrice.setScale(2, RoundingMode.FLOOR);
+    }
+
     // method to change quality of a product and updates the price
     public void setQuality(int quality) {
         this.currentQuality = quality;
-        this.currentPrice = basePrice.add(new BigDecimal(currentQuality*0.1));
-        this.currentPrice = this.currentPrice.setScale(2, RoundingMode.FLOOR);
+        if (this.productType.equals(ProductType.cheese)) {
+            this.updatePrice();
+        }
     }
 
     // method to set the date where this product has been put on the shelf
