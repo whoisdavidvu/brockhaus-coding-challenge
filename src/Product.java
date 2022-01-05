@@ -33,6 +33,7 @@ public class Product {
         }
         this.basePrice = new BigDecimal(newBasePriceAsString);
         this.currentPrice = basePrice.add(new BigDecimal(originalQuality*0.10));
+        this.currentPrice = this.currentPrice.setScale(2, RoundingMode.FLOOR);
         
         // throwing exceptions for invalid inputs
         if (name.trim().isEmpty()) {
