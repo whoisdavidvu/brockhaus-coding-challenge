@@ -105,7 +105,7 @@ public class Product {
     // method to change quality of a product and updates the price
     public void setQuality(int quality) {
         this.currentQuality = quality;
-        if (this.productType.equals(ProductType.cheese)) {
+        if (!this.productType.equals(ProductType.wine)) {
             this.updatePrice();
         }
     }
