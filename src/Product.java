@@ -1,5 +1,6 @@
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import java.math.BigDecimal;
 
 public class Product {
@@ -49,6 +50,13 @@ public class Product {
         Date today = new Date();
         if (expirationDate.before(today) && productType != ProductType.wine){
             throw new IllegalArgumentException("Expired products can not be added to shelf!");
+        }
+        long expirationDifferenceMilliseconds = Math.abs(new Date().getTime() - expirationDate.getTime());
+        long expirationDifferenceDays = TimeUnit.DAYS.convert(expirationDifferenceMilliseconds, TimeUnit.MILLISECONDS);
+        if (expirationDate.after(today) && 
+            productType == ProductType.cheese && 
+            (expirationDifferenceDays < 50 || expirationDifferenceDays > 100)) {
+            throw new IllegalArgumentException("Expiration date of this cheese is either under 50 days or over 100 days after today");
         }
     }
 
