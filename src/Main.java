@@ -28,7 +28,7 @@ public class Main {
 
         // See Product.java to see that cheese can only have an expiration date from 50 to 100 days in the future from today and
         // that wine with negative quality rating will not be accepted. Both will throw an exception.
-
+        
         System.out.println(superduper.toString());
         System.out.println();
         System.out.println("Task: fixed price that doesnt change + final price changed by quality rating.");
@@ -40,6 +40,7 @@ public class Main {
         System.out.println("Notice: Changing quality of other food changes price (here: salmon).");
         System.out.println("--------------------------------------------------");
 
+        // Running dailyCheck at this date to simulate a run of the program on that specific date, for real world use current date
         superduper.dailyCheck("09.01.2022");
         System.out.println(superduper.toString());
         System.out.println();
@@ -59,8 +60,5 @@ public class Main {
         System.out.println("Task: Wine does not expire and will not get removed.");
         System.out.println("Task: Wine does not change its price after a quality rating change and will not get removed.");
         System.out.println("--------------------------------------------------");
-
-
-
     }
 }
