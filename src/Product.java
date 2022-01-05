@@ -10,7 +10,7 @@ public class Product {
     private String name;                // name of product
     private int originalQuality;        // original quality rating of product
     private int currentQuality;         // current quality rating of product
-    private Date dateAdded;             // date when the product was put on shelf  
+    private Date dateAdded;             // date when the product was put on shelf (is automtically set to current date through constructor) 
     private Date expirationDate;        // expiration date of product
     private BigDecimal basePrice;       // base price of product
     private BigDecimal currentPrice;    // daily/final price of product
