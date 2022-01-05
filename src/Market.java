@@ -61,6 +61,7 @@ public class Market {
     }
 
     // checks current inventory for expired products and adds them to the toRemove list
+    // and updates quality rating of products and changes current prices accordingly 
     public void dailyCheck(String stringTargetDate) {
         try {
             // translates date in string to a format for Date
@@ -82,10 +83,16 @@ public class Market {
                 }
 
                 // calculate number of days the wine has been on the shelf and adjusts new quality rating
-                if (product.getProductType().equals(ProductType.wine)) {
+                if (product.getProductType().equals(ProductType.wine) && product.getExpirationDate().before(targetDate)) {
                     long wineExpirationMilliseconds = Math.abs(targetDate.getTime() - product.getExpirationDate().getTime());
                     long wineExpirationDays = TimeUnit.DAYS.convert(wineExpirationMilliseconds, TimeUnit.MILLISECONDS);
-                    product.setQuality(product.getOriginalQuality() + Math.toIntExact(wineExpirationDays/10));
+                    if (wineExpirationDays < 50) {
+                        product.setQuality(product.getOriginalQuality() + Math.toIntExact(wineExpirationDays/10));
+                    }
+                    else {
+                        product.setQuality(50);
+                    }
+                    
                 }
 
                 // checks every product in inventory for expiration or unadaquate quality (except wine)
