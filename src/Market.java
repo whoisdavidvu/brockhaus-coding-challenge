@@ -97,7 +97,7 @@ public class Market {
 
                 // checks every product in inventory for expiration or unadaquate quality (except wine)
                 if ((product.getProductType().equals(ProductType.other) && product.getExpirationDate().before(targetDate)) || 
-                    (product.getProductType().equals(ProductType.cheese) && product.getCurrentQuality() < 30)) {
+                    (product.getProductType().equals(ProductType.cheese) && product.getCurrentQuality() <= 30)) {
                     newInventory.remove(product);
                     this.toRemoveList.add(product);
                 }  

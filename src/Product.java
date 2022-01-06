@@ -45,8 +45,8 @@ public class Product {
         if (basePrice.scale() > 2) {
             throw new IllegalArgumentException("Price is invalid!");
         }
-        if (originalQuality < 30 && productType == ProductType.cheese) {
-            throw new IllegalArgumentException("This cheese has a quality rating of under 30 and cannot be added!");
+        if (originalQuality <= 30 && productType == ProductType.cheese) {
+            throw new IllegalArgumentException("This cheese has a quality rating of 30 and under and cannot be added!");
         }
         if (originalQuality < 0 && productType == ProductType.wine) {
             throw new IllegalArgumentException("This wine has a negative quality rating and cannot be accepted!");
