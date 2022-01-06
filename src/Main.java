@@ -7,7 +7,7 @@ public class Main {
         Market superduper = new Market("superduper");
 
         Product emmentaler = new Product("Emmentaler", ProductType.cheese, 40, "08.03.2022", "1.99");
-        Product gouda = new Product("Gouda", ProductType.cheese, 30, "01.03.2022", "1.49");
+        Product gouda = new Product("Gouda", ProductType.cheese, 31, "01.03.2022", "1.49");
         Product granapadano = new Product("Grana Padano", ProductType.cheese, 40,  "15.03.2022", "2.99");
         Product parmesan = new Product("Parmesan", ProductType.cheese, 40, "15.03.2022", "3.49");
         Product redwine = new Product("Rotwein", ProductType.wine, 40, "01.02.2022", "4.99");
