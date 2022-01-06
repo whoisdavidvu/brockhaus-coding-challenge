@@ -7,7 +7,7 @@ public class Main {
         Market superduper = new Market("superduper");
 
         Product emmentaler = new Product("Emmentaler", ProductType.cheese, 40, "08.03.2022", "1.99");
-        Product gouda = new Product("Gouda", ProductType.cheese, 31, "01.03.2022", "1.49");
+        Product gouda = new Product("Gouda", ProductType.cheese, 31, "02.03.2022", "1.49");
         Product granapadano = new Product("Grana Padano", ProductType.cheese, 40,  "15.03.2022", "2.99");
         Product parmesan = new Product("Parmesan", ProductType.cheese, 40, "15.03.2022", "3.49");
         Product redwine = new Product("Rotwein", ProductType.wine, 40, "01.02.2022", "4.99");
@@ -41,7 +41,7 @@ public class Main {
         System.out.println("--------------------------------------------------");
 
         // Running dailyCheck at this date to simulate a run of the program on that specific date, for real world use current date
-        superduper.dailyCheck("09.01.2022");
+        superduper.dailyCheck("08.01.2022");
         System.out.println(superduper.toString());
         System.out.println();
         System.out.println("Task: Cheese (here: gouda) will get removed when it has a quality rating lower than 30.");
